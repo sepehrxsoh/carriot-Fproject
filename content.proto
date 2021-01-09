@@ -1,0 +1,15 @@
+syntax = "proto3";
+package content;
+
+message users {
+  int32 vehicleID = 1;
+  string vehicleName = 2;
+  string plateNumber = 3;
+  string dateTime = 4;
+  string color = 5;
+  string productDate = 6;
+}
+
+service serverRes {
+  rpc serverback(users) returns (users){}
+}
