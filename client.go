@@ -1,7 +1,7 @@
 package main
 
 import (
-	"google.golang.org/grcp"
+	"google.golang.org/grpc"
 	"log"
 	"net"
 )
@@ -11,7 +11,7 @@ func main() {
 	if err != nil {
 		log.Fatalf("FAILED %v", err)
 	}
-	grcpServer := grcp.NewServer()
+	grcpServer := grpc.NewServer()
 
 	if err := grcpServer.Serve(lis); err != nil {
 		log.Fatalf("failed : %s", err)

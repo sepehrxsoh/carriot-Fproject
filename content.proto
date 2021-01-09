@@ -11,5 +11,5 @@ message users {
 }
 
 service serverRes {
-  rpc serverback(users) returns (users){}
+  rpc CreatVehicle(users) returns (users){}
 }
