@@ -84,22 +84,26 @@ func servers(w http.ResponseWriter, r *http.Request) {
 	}
 	body, _ := ioutil.ReadAll(r.Body)
 	st := string(body)
+	if st == "" {
+		fmt.Fprint(w, vehicles)
+		res := strconv.Itoa(len(vehicles))
+		fmt.Fprint(w, "\n length of all vehicles:"+res)
+		return
+	}
+
 	to, err3 := strconv.Atoi(st)
 	if err3 == nil {
 		if to < len(vehicles) {
 			finallist := vehicles[:to]
 			fmt.Fprint(w, finallist)
 			res := strconv.Itoa(len(finallist))
-			fmt.Fprint(w, "\n lenght of list:"+res)
+			fmt.Fprint(w, "\n length of list:"+res)
 		}
 		if to >= len(vehicles) {
 			fmt.Fprint(w, vehicles)
 			res := strconv.Itoa(len(vehicles))
-			fmt.Fprint(w, "\n lenght of list:"+res)
+			fmt.Fprint(w, "\n length of list:"+res)
 		}
-	}
-	if err3 != nil {
-		fmt.Fprint(w, "please input Number")
 	}
 }
 
