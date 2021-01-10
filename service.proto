@@ -1,7 +1,7 @@
 syntax = "proto3";
 
-package main;
-
+package proto;
+option go_package = "serverbp";
 
 message Request{
   int64 payload =1 ;

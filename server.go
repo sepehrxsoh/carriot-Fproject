@@ -1,14 +1,15 @@
 package main
 
 import (
-	//"context"
+	"context"
 	"fmt"
+	"github.com/sepehrxsoh/carriot-Fproject/proto"
+	"google.golang.org/grpc"
+	"log"
 	"math/rand"
 	"strconv"
 	"time"
-	/*"google.golang.org/grpc"
-	"github.com/sepehrxsoh/carriot-Fproject/service"
-	"log"*/)
+)
 
 type customer struct {
 	vehicleID   int
@@ -91,9 +92,9 @@ func MakeList() {
 type server struct {
 }
 
-/*func (s *server)  makelist(ctx context.Context , request *.Reques)(*proto.Response, err){
+func (s *server) makelist(ctx context.Context, request *main.Request) (*main.Response, err) {
 
-}*/
+}
 func main() {
 
 	MakeList()
