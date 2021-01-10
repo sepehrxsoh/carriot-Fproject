@@ -1,11 +1,14 @@
 package main
 
 import (
+	//"context"
 	"fmt"
 	"math/rand"
 	"strconv"
 	"time"
-)
+	/*"google.golang.org/grpc"
+	"github.com/sepehrxsoh/carriot-Fproject/service"
+	"log"*/)
 
 type customer struct {
 	vehicleID   int
@@ -69,8 +72,7 @@ func cars() string {
 	n := random(0, l)
 	return car[n]
 }
-
-func main() {
+func MakeList() {
 	min := 10
 	max := 100
 	n := random(min, max)
@@ -84,5 +86,16 @@ func main() {
 		}
 		CreatVehicle(x)
 	}
+}
+
+type server struct {
+}
+
+/*func (s *server)  makelist(ctx context.Context , request *.Reques)(*proto.Response, err){
+
+}*/
+func main() {
+
+	MakeList()
 	fmt.Printf("%v , %v", vehicleList, len(vehicleList))
 }

@@ -1,6 +1,7 @@
 syntax = "proto3";
 
-package proto;
+package main;
+
 
 message Request{
   int64 payload =1 ;
