@@ -2,10 +2,10 @@ syntax = "proto3";
 
 package proto;
 
-message request{
+message Request{
   int64 payload =1 ;
 }
-message Reponse {
+message Response {
   int32 vehicleID = 1;
   string vehicleName = 2;
   string plateNumber = 3;
@@ -15,5 +15,5 @@ message Reponse {
 }
 
 service ListCustomers {
-  rpc makeList(request) returns (Reponse);
+  rpc makeList(Request) returns (Response);
 }
