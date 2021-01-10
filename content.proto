@@ -1,7 +1,10 @@
 syntax = "proto3";
 package content;
 
-message users {
+message request{
+  int64 payload =1 ;
+}
+message Reponse {
   int32 vehicleID = 1;
   string vehicleName = 2;
   string plateNumber = 3;
@@ -10,6 +13,6 @@ message users {
   string productDate = 6;
 }
 
-service serverRes {
-  rpc CreatVehicle(users) returns (users){}
+service ListCustomers {
+  rpc makeList(request) returns (Reponse);
 }
