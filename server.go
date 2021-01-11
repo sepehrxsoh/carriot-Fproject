@@ -3,7 +3,7 @@ package main
 import (
 	"context"
 	"encoding/json"
-	proto "github.com/sepehrxsoh/carriot-Fproject"
+	"github.com/sepehrxsoh/carriot-Fproject/proto"
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/reflection"
 	"math/rand"

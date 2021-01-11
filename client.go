@@ -3,7 +3,7 @@ package main
 import (
 	"fmt"
 	"github.com/gin-gonic/gin"
-	proto "github.com/sepehrxsoh/carriot-Fproject"
+	"github.com/sepehrxsoh/carriot-Fproject/proto"
 	"google.golang.org/grpc"
 	"log"
 	"net/http"
