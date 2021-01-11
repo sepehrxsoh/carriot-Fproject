@@ -1,8 +1,12 @@
 package main
 
 import (
-	"fmt"
+	"context"
+	"google.golang.org/grpc"
+	"google.golang.org/grpc/reflection"
+	"log"
 	"math/rand"
+	"net"
 	"strconv"
 	"time"
 )
@@ -69,8 +73,7 @@ func cars() string {
 	n := random(0, l)
 	return car[n]
 }
-
-func main() {
+func MakeList() {
 	min := 10
 	max := 100
 	n := random(min, max)
@@ -84,5 +87,31 @@ func main() {
 		}
 		CreatVehicle(x)
 	}
-	fmt.Printf("%v , %v", vehicleList, len(vehicleList))
+}
+
+type server struct {
+}
+
+func (s *server) makelist(ctx context.Context, request *proto.Request) (*proto.Response, error) {
+	pay := request.GetPayload()
+	if pay > len(vehicleList) {
+		pay = len(vehicleList)
+	}
+	list := vehicleList[:pay]
+	result := list
+	return &proto.Response{Result: result}, nil
+}
+func main() {
+	MakeList()
+	listener, err := net.Listen("tcp", ":8080")
+	if err != nil {
+		log.Fatal("%v", err)
+	}
+	srv := grpc.NewServer()
+	proto.RegisterListCustomersServer(srv, &server{})
+	reflection.Register(srv)
+	if e := srv.Serve(listener); e != nil {
+		log.Fatal(err)
+	}
+
 }

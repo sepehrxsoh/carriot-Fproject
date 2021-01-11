@@ -1,0 +1,15 @@
+syntax = "proto3";
+
+package proto;
+
+
+message Request{
+  int64 payload =1 ;
+}
+message Response {
+  string result = 1;
+}
+
+service ListCustomers {
+  rpc makeList(Request) returns (Response) {};
+}
