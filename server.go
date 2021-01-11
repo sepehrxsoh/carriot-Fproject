@@ -3,10 +3,11 @@ package main
 import (
 	"context"
 	"fmt"
-	"github.com/sepehrxsoh/carriot-Fproject/proto"
 	"google.golang.org/grpc"
+	"google.golang.org/grpc/reflection"
 	"log"
 	"math/rand"
+	"net"
 	"strconv"
 	"time"
 )
@@ -92,11 +93,26 @@ func MakeList() {
 type server struct {
 }
 
-func (s *server) makelist(ctx context.Context, request *main.Request) (*main.Response, err) {
-
+func (s *server) makelist(ctx context.Context, request *proto.Request) (*proto.Response, error) {
+	pay := request.GetPayload()
+	if pay > len(vehicleList) {
+		pay = len(vehicleList)
+	}
+	list := vehicleList[:pay]
+	result := list
+	return &proto.Response{Result: result}, nil
 }
 func main() {
-
 	MakeList()
-	fmt.Printf("%v , %v", vehicleList, len(vehicleList))
+	listener, err := net.Listen("tcp", ":8080")
+	if err != nil {
+		log.Fatal("%v", err)
+	}
+	srv := grpc.NewServer()
+	proto.RegisterListCustomersServer(srv, &server{})
+	reflection.Register(srv)
+	if e := srv.Serve(listener); e != nil {
+		log.Fatal(err)
+	}
+
 }
