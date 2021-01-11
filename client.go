@@ -3,6 +3,7 @@ package main
 import (
 	"fmt"
 	"github.com/gin-gonic/gin"
+	proto "github.com/sepehrxsoh/carriot-Fproject"
 	"google.golang.org/grpc"
 	"log"
 	"net/http"
@@ -22,7 +23,7 @@ func main() {
 			ctx.JSON(http.StatusBadRequest, gin.H{"error": "invalid payload"})
 		}
 		req := &proto.Request{Payload: int64(payload)}
-		if response, err := client.makeList(ctx, req); err == nil {
+		if response, err := client.MakeList(ctx, req); err == nil {
 			ctx.JSON(http.StatusOK, gin.H{
 				"result": fmt.Sprint(response.Result),
 			})

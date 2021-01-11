@@ -2,9 +2,10 @@ package main
 
 import (
 	"context"
+	"encoding/json"
+	proto "github.com/sepehrxsoh/carriot-Fproject"
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/reflection"
-	"log"
 	"math/rand"
 	"net"
 	"strconv"
@@ -73,7 +74,7 @@ func cars() string {
 	n := random(0, l)
 	return car[n]
 }
-func MakeList() {
+func List() {
 	min := 10
 	max := 100
 	n := random(min, max)
@@ -89,29 +90,31 @@ func MakeList() {
 	}
 }
 
-type server struct {
-}
-
 func (s *server) makelist(ctx context.Context, request *proto.Request) (*proto.Response, error) {
 	pay := request.GetPayload()
-	if pay > len(vehicleList) {
-		pay = len(vehicleList)
+	x := int64(len(vehicleList))
+	if pay > x {
+		pay = x
 	}
 	list := vehicleList[:pay]
-	result := list
-	return &proto.Response{Result: result}, nil
+	result, _ := json.Marshal(list)
+	return &proto.Response{Result: string(result)}, nil
 }
+
+type server struct{}
+
 func main() {
-	MakeList()
+	List()
 	listener, err := net.Listen("tcp", ":8080")
 	if err != nil {
-		log.Fatal("%v", err)
+		panic(err)
 	}
+	s := server{}
 	srv := grpc.NewServer()
-	proto.RegisterListCustomersServer(srv, &server{})
+	proto.RegisterListCustomersServer(srv, &s)
 	reflection.Register(srv)
 	if e := srv.Serve(listener); e != nil {
-		log.Fatal(err)
+		panic(e)
 	}
 
 }
