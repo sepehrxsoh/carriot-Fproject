@@ -1,20 +1,15 @@
 syntax = "proto3";
 
 package proto;
-option go_package = "serverbp";
+
 
 message Request{
   int64 payload =1 ;
 }
 message Response {
-  int32 vehicleID = 1;
-  string vehicleName = 2;
-  string plateNumber = 3;
-  string dateTime = 4;
-  string color = 5;
-  string productDate = 6;
+  string result = 1;
 }
 
 service ListCustomers {
-  rpc makeList(Request) returns (Response);
+  rpc makeList(Request) returns (Response) {};
 }
